@@ -1,10 +1,11 @@
 #include "Filme.h"
 #include <Windows.h>
 #include <shellapi.h>
+#include <iostream>
 
 Filme::Filme()
 {
-
+	// Fiecare film e unic dupa titlu,gen si an
 }
 
 Filme::Filme(const std::string& title, const std::string& genre, const int year, const int likes, const std::string& source)
@@ -69,6 +70,11 @@ void Filme::setSource(std::string source)
 void Filme::play()
 {
 	ShellExecuteA(NULL, NULL, "chrome.exe", this->getSource().c_str(), NULL, SW_SHOWMAXIMIZED);
+}
+
+void Filme::show()
+{
+	std::cout << this->getTitle() << ' ' << this->getGenre() << ' ' << this->getYear() << ' ' << this->getLikes() << ' ' << this->getSource() << '\n';
 }
 
 Filme::~Filme()

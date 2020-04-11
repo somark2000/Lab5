@@ -32,6 +32,9 @@ public:
 	// Plays the current trailer: the page corresponding to the source link is opened in a browser.
 	void play();
 
+	//displays the current film
+	void show();
+
 	// destructor
 	~Filme();
 };

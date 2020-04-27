@@ -1,8 +1,14 @@
 #include "UI.h"
+#include "contr_admin.h"
 #include <iostream>
 #include <string>
 
 using namespace std;
+
+ui::ui(contr_admin c)
+{
+	this->contr = c;
+}
 
 ui::ui()
 {
@@ -27,7 +33,7 @@ void ui::amenu()
 	cout << "\t 1 - Add film" << endl;
 	cout << "\t 2 - Remove film" << endl;
 	cout << "\t 3 - Update film" << endl;
-	cout << "\t 4- Show database\n";
+	cout << "\t 4 - Show database\n";
 }
 
 void ui::umenu()
@@ -47,125 +53,133 @@ void ui::run()
 		int com;
 		cout << "Input the command: ";
 		cin >> com;
-		//cin.ignore();
-		switch (com)
+		if (com >= 0)
 		{
-		case 1:
-		{
-			contr_user cont = contr_user();
-			while (true)
+			//cin.ignore();
+			switch (com)
 			{
-				ui::umenu();
-				int c;
-				cout << "Input the command: ";
-				cin >> c;
-				switch (c)
+			case 1:
+			{
+				contr_user cont = contr_user();
+				while (true)
 				{
-				case 1:
-				{
-					cont.view();
+					ui::umenu();
+					int c;
+					cout << "Input the command: ";
+					cin >> c;
+					switch (c)
+					{
+					case 1:
+					{
+						cont.view();
+						break;
+					}
+					case 2:
+					{
+						cout << "Film to be removed\n";
+						string title, genre, link = "s";
+						int like = 0, year;
+						cout << "Title: ";
+						cin >> title;
+						cout << "Genre: ";
+						cin >> genre;
+						cout << "Year: ";
+						cin >> year;
+						cin >> link;
+						Filme f = Filme(title, genre, year, like, link);
+						cont.remove(f);
+						break;
+					}
+					case 3:
+					{
+						cont.show_all();
+						break;
+					}
+					default:
+						return;
+					}
 					break;
-				}
-				case 2:
+				}}
+			case 2:
+			{
+				contr_admin cont = this->contr;
+				while (true)
 				{
-					cout << "Film to be removed\n";
-					string title, genre, link = "s";
-					int like = 0, year;
-					cout << "Title: ";
-					cin >> title;
-					cout << "Genre: ";
-					cin >> genre;
-					cout << "Year: ";
-					cin >> year;
-					cin >> link;
-					Filme f = Filme(title, genre, year, like, link);
-					cont.remove(f);
-					break;
-				}
-				case 3:
-				{
-					cont.show_all();
-					break;
-				}
-				default:
-					return;
+					ui::amenu();
+					int c;
+					cout << "Input the command: ";
+					cin >> c;
+					switch (c)
+					{
+					case 1:
+					{
+						cout << "New film to be added\n";
+						string title, genre, link;
+						int like, year;
+						cout << "Title: ";
+						cin >> title;
+						cout << "Genre: ";
+						cin >> genre;
+						cout << "Year: ";
+						cin >> year;
+						cout << "Likes: ";
+						cin >> like;
+						cout << "Source: ";
+						cin >> link;
+						Filme f = Filme(title, genre, year, like, link);
+						cont.add(f);
+						break;
+					}
+					case 2:
+					{
+						cout << "Film to be removed\n";
+						string title, genre, link = "s";
+						int like = 0, year;
+						cout << "Title: ";
+						cin >> title;
+						cout << "Genre: ";
+						cin >> genre;
+						cout << "Year: ";
+						cin >> year;
+						Filme f = Filme(title, genre, year, like, link);
+						cont.remove(f);
+						break;
+					}
+					case 3:
+					{
+						cout << "Film to be updated\n";
+						string title, genre, link = "s";
+						int like = 0, year;
+						cout << "Title: ";
+						cin >> title;
+						cout << "Genre: ";
+						cin >> genre;
+						cout << "Year: ";
+						cin >> year;
+						Filme f = Filme(title, genre, year, like, link);
+						cont.update(f);
+						break;
+					}
+					case 4:
+					{
+						cont.show_all();
+						cout << '\n';
+						break;
+					}
+
+					default:
+						return;
+					}
 				}
 				break;
-			}}
-		case 2:
-		{
-			contr_admin cont = contr_admin();
-			while (true)
-			{
-				ui::amenu();
-				int c;
-				cout << "Input the command: ";
-				cin >> c;
-				switch (c)
-				{
-				case 1:
-				{
-					cout << "New film to be added\n";
-					string title, genre, link;
-					int like, year;
-					cout << "Title: ";
-					cin >> title;
-					cout << "Genre: ";
-					cin >> genre;
-					cout << "Year: ";
-					cin >> year;
-					cout << "Likes: ";
-					cin >> like;
-					cout << "Source: ";
-					cin >> link;
-					Filme f = Filme(title, genre, year, like, link);
-					cont.add(f);
-					break;
-				}
-				case 2:
-				{
-					cout << "Film to be removed\n";
-					string title, genre, link="s";
-					int like=0, year;
-					cout << "Title: ";
-					cin >> title;
-					cout << "Genre: ";
-					cin >> genre;
-					cout << "Year: ";
-					cin >> year;
-					Filme f = Filme(title, genre, year, like, link);
-					cont.remove(f);
-					break;
-				}
-				case 3:
-				{
-					cout << "Film to be updated\n";
-					string title, genre, link = "s";
-					int like = 0, year;
-					cout << "Title: ";
-					cin >> title;
-					cout << "Genre: ";
-					cin >> genre;
-					cout << "Year: ";
-					cin >> year;
-					Filme f = Filme(title, genre, year, like, link);
-					cont.update(f);
-					break;
-				}
-				case 4:
-				{
-					cont.show_all();
-					cout << '\n';
-					break;
-				}
-				default:
-					return;
-				}
 			}
-			break;
+			default:
+				return;
+			}
 		}
-		default:
-			return;
+		else
+		{
+			cout << "Please enter a valid command!" << endl;
 		}
 	}
 }

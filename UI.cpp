@@ -89,8 +89,15 @@ void ui::run()
 						cin >> genre;
 						cout << "Year: ";
 						cin >> year;
-						Filme fi = Filme(title, genre, year, like, link);
-						cont.remove(fi);
+						if (year < 0 || 1000 > year || year > 2020)
+						{
+							cout << "please enter a valid year!" << endl;
+						}
+						else {
+							Filme fi = Filme(title, genre, year, like, link);
+							cont.remove(fi);
+							break;
+						}
 						break;
 					}
 					case 3:
@@ -131,8 +138,15 @@ void ui::run()
 						cin >> like;
 						cout << "Source: ";
 						cin >> link;
-						Filme f = Filme(title, genre, year, like, link);
-						cont.add(f);
+						if (year < 0 || 1000 > year || year > 2020)
+						{
+							cout << "please enter a valid year!" << endl;
+						}
+						else {
+							Filme f = Filme(title, genre, year, like, link);
+							cont.add(f);
+							break;
+						}
 						break;
 					}
 					case 2:
@@ -146,8 +160,15 @@ void ui::run()
 						cin >> genre;
 						cout << "Year: ";
 						cin >> year;
-						Filme f = Filme(title, genre, year, like, link);
-						cont.remove(f);
+						if (year < 0 || 1000 > year || year > 2020)
+						{
+							cout << "please enter a valid year!" << endl;
+						}
+						else {
+							Filme f = Filme(title, genre, year, like, link);
+							cont.remove(f);
+							break;
+						}
 						break;
 					}
 					case 3:
@@ -161,8 +182,15 @@ void ui::run()
 						cin >> genre;
 						cout << "Year: ";
 						cin >> year;
-						Filme f = Filme(title, genre, year, like, link);
-						cont.update(f);
+						if (year < 0 || 1000 > year || year > 2020)
+						{
+							cout << "please enter a valid year!" << endl;
+						}
+						else {
+							Filme f = Filme(title, genre, year, like, link);
+							cont.update(f);
+							break;
+						}
 						break;
 					}
 					case 4:

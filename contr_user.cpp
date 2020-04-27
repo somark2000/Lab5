@@ -39,7 +39,16 @@ void contr_user::remove(Filme f)
 				cout << "Do you want to rate it? (y/n)";
 				string s;
 				cin >> s;
-				if (s == "y") rep.watch_list.at(i).setLikes(rep.watch_list.at(i).getLikes()+1);
+				if (s == "y")
+				{
+					for (int j = 0; j < rep.movies.size();++j)
+					{
+						if ((rep.movies.at(j).getTitle() == f.getTitle()) and (rep.movies.at(j).getGenre() == f.getGenre()) and (rep.movies.at(j).getYear() == f.getYear()))
+						{
+							rep.movies.at(j).setLikes();
+						}
+					}
+				}
 				return;
 			}
 		}

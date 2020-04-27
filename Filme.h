@@ -26,7 +26,7 @@ public:
 	void setTitle(std::string title);
 	void setGenre(std::string genre);
 	void setYear(int year);
-	void setLikes(int likes);
+	void setLikes();
 	void setSource(std::string source);
 
 	// Plays the current trailer: the page corresponding to the source link is opened in a browser.

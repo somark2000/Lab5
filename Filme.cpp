@@ -57,9 +57,9 @@ void Filme::setYear(int year)
 	this->year = year;
 }
 
-void Filme::setLikes(int likes)
+void Filme::setLikes()
 {
-	this->likes = likes;
+	this->likes = likes+1;
 }
 
 void Filme::setSource(std::string source)
